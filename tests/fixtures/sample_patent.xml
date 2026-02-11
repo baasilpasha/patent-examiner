@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<us-patent-grant>
+  <bibliographic-data-grant>
+    <publication-reference>
+      <document-id><doc-number>US1234567B2</doc-number><date>20250107</date></document-id>
+    </publication-reference>
+    <invention-title>Adaptive compute scheduling</invention-title>
+    <classifications-cpc>
+      <classification-cpc>
+        <classification-cpc-text>G06F 9/445</classification-cpc-text>
+      </classification-cpc>
+    </classifications-cpc>
+  </bibliographic-data-grant>
+  <abstract><p>A system configured to optimize workloads.</p></abstract>
+  <description>
+    <summary>
+      <p>Summary paragraph one.</p>
+    </summary>
+    <p>Detailed description paragraph that is longer but still straightforward.</p>
+  </description>
+  <claims>
+    <claim num="1"><claim-text>1. A system comprising a processor configured to schedule tasks.</claim-text></claim>
+    <claim num="2"><claim-text>2. The system of claim 1, wherein the processor balances threads.</claim-text></claim>
+  </claims>
+  <references-cited>
+    <citation><patcit><document-id><doc-number>US7654321B1</doc-number></document-id></patcit></citation>
+  </references-cited>
+</us-patent-grant>

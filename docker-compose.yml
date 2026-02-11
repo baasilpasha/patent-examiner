@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: patent_mvp_postgres
+    environment:
+      POSTGRES_USER: patent
+      POSTGRES_PASSWORD: patent
+      POSTGRES_DB: patent_mvp
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+
+  opensearch:
+    image: opensearchproject/opensearch:2.14.0
+    container_name: patent_mvp_opensearch
+    environment:
+      discovery.type: single-node
+      plugins.security.disabled: "true"
+      OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    volumes:
+      - ./opensearch-data:/usr/share/opensearch/data
