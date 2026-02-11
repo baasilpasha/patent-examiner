@@ -131,10 +131,17 @@ class PTGRXMLDownloader:
 
     def select_weeks(self, weeks: int = 12, since_last: bool = False) -> list[tuple[str, str]]:
         latest = self.discover_latest_weeks(weeks=weeks)
-        if not since_last:
-            return latest
         processed = self._load_state()
-        return [w for w in latest if w[0] not in processed]
+        unprocessed = [w for w in latest if w[0] not in processed]
+        if since_last:
+            return unprocessed
+        if len(unprocessed) != len(latest):
+            LOGGER.info(
+                "Skipping %s already-processed week(s); %s week(s) remain",
+                len(latest) - len(unprocessed),
+                len(unprocessed),
+            )
+        return unprocessed
 
     def download_week(self, week_date: str, url: str) -> Path:
         out_dir = self.raw_root / f"ipg{week_date}"

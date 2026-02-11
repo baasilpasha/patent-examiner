@@ -40,7 +40,8 @@ Runtime paths used:
 
 ## Prerequisites on Fedora server
 
-- Docker + Docker Compose plugin
+- **Fedora default:** Podman + podman-compose (or `podman compose`)
+- Docker + Docker Compose plugin (also supported)
 - Python 3.10+
 - Optional CUDA drivers/runtime for GPU embedding acceleration
 
@@ -55,7 +56,10 @@ source .venv/bin/activate
 pip install -U pip
 pip install -e .[dev]
 
+# If using Docker
 docker compose up -d
+# If using Podman on Fedora
+podman compose up -d
 ```
 
 ## Environment variables
@@ -117,7 +121,8 @@ Current DB schema stores embeddings as `vector(768)`. At runtime, the embedding 
 
 - Downloader first parses public ODP PTGRXML dataset-page links (newest-first by week id), then falls back to ODP search API if needed.
 - Processed weeks are recorded under `data/raw/ptgrxml/processed_weeks.json`.
-- `--since-last` only downloads/parses newly discovered weeks not already marked processed.
+- All ingest modes skip already processed weeks by default using `processed_weeks.json`.
+- `--since-last` emphasizes incremental operation and is ideal for cron/weekly jobs.
 - Downloads are resumable (`.part` temp files + HTTP range support).
 
 ## Scale path (12 weeks -> full corpus)
@@ -141,7 +146,10 @@ pytest -q
 ### Smoke ingest: 1 week
 
 ```bash
+# If using Docker
 docker compose up -d
+# If using Podman on Fedora
+podman compose up -d
 source .venv/bin/activate
 python -m patent_mvp ingest --weeks 1 --cpc G06F
 ```
@@ -149,7 +157,10 @@ python -m patent_mvp ingest --weeks 1 --cpc G06F
 ### Medium ingest: 12 weeks
 
 ```bash
+# If using Docker
 docker compose up -d
+# If using Podman on Fedora
+podman compose up -d
 source .venv/bin/activate
 python -m patent_mvp ingest --weeks 12 --cpc G06F
 ```
