@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patent-grant>
+  <us-patent-grant>
+    <publication-reference>
+      <document-id>
+        <doc-number>US12345678B2</doc-number>
+        <date>20240102</date>
+      </document-id>
+    </publication-reference>
+    <invention-title>Adaptive compute system</invention-title>
+    <abstract>
+      <p>A computer system comprising a processor configured to schedule tasks.</p>
+    </abstract>
+    <classifications-cpc>
+      <classification-cpc>
+        <classification-cpc-text>G06F17/30</classification-cpc-text>
+      </classification-cpc>
+      <classification-cpc>
+        <classification-cpc-text>H04L12/58</classification-cpc-text>
+      </classification-cpc>
+    </classifications-cpc>
+    <us-references-cited>
+      <citation>
+        <patcit><document-id><doc-number>US7654321B2</doc-number></document-id></patcit>
+      </citation>
+    </us-references-cited>
+    <claims>
+      <claim num="1"><claim-text>1. A system comprising a processor configured to execute instructions.</claim-text></claim>
+      <claim num="2"><claim-text>2. The system of claim 1, wherein the processor updates a cache.</claim-text></claim>
+    </claims>
+    <description>
+      <summary>
+        <p>This summary paragraph introduces key behavior.</p>
+      </summary>
+      <p>This description paragraph provides additional implementation detail for a software architecture.</p>
+    </description>
+  </us-patent-grant>
+</patent-grant>

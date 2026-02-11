@@ -1,0 +1,21 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    }
+  },
+  "mappings": {
+    "properties": {
+      "chunk_id": {"type": "keyword"},
+      "publication_number": {"type": "keyword"},
+      "section_type": {"type": "keyword"},
+      "text": {
+        "type": "text",
+        "term_vector": "with_positions_offsets",
+        "index_options": "offsets"
+      },
+      "metadata": {"type": "object", "enabled": true}
+    }
+  }
+}
