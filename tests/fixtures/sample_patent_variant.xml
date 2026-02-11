@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <us-patent-grant>
+    <bibliographic-data-grant>
+      <publication-reference>
+        <document-id>
+          <doc-number>US2222222B1</doc-number>
+          <date>20241231</date>
+        </document-id>
+      </publication-reference>
+      <invention-title>Memory allocator</invention-title>
+      <classifications-cpc>
+        <classification-cpc>
+          <classification-cpc-text>G06F 12/02</classification-cpc-text>
+        </classification-cpc>
+      </classifications-cpc>
+    </bibliographic-data-grant>
+    <abstract><p>Allocator for pages and buffers.</p></abstract>
+    <description>
+      <summary>
+        <p>Summary inside description variant.</p>
+      </summary>
+      <detailed-description>
+        <p>Implementation details paragraph.</p>
+      </detailed-description>
+    </description>
+    <claims>
+      <claim>
+        <claim-num>1</claim-num>
+        <claim-text>1. A method comprising allocating memory.</claim-text>
+      </claim>
+    </claims>
+  </us-patent-grant>
+</root>

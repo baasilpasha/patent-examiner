@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "patent-mvp"
+version = "0.1.0"
+description = "MVP patent retrieval layer for US grants"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "lxml>=5.0.0",
+  "requests>=2.31.0",
+  "opensearch-py>=2.5.0",
+  "psycopg[binary]>=3.1.18",
+  "python-dotenv>=1.0.1",
+  "sentence-transformers>=3.0.1",
+  "numpy>=1.26.0",
+  "tqdm>=4.66.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools]
+packages = ["patent_mvp"]
