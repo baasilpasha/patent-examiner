@@ -33,3 +33,16 @@ def test_extract_week_id_falls_back_to_file_dates() -> None:
         "downloadUrl": "https://api.uspto.gov/api/v1/bulk-data/download/PTGRXML/somefile.zip",
     }
     assert PTGRXMLDownloader._extract_week_id(row) == "20240312"
+
+
+def test_select_weeks_skips_processed_even_without_since_last(tmp_path) -> None:
+    downloader = PTGRXMLDownloader(data_root=str(tmp_path))
+    downloader._save_state({"20240213"})
+    downloader.discover_latest_weeks = lambda weeks=12: [
+        ("20240213", "https://example.org/ipg20240213.zip"),
+        ("20240130", "https://example.org/ipg20240130.zip"),
+    ]
+
+    selected = downloader.select_weeks(weeks=2, since_last=False)
+
+    assert selected == [("20240130", "https://example.org/ipg20240130.zip")]
