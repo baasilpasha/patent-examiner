@@ -14,6 +14,19 @@ def test_parse_search_response_sorts_latest_first_and_dedupes() -> None:
     ]
 
 
+def test_parse_dataset_page_links_sorts_latest_first_and_dedupes() -> None:
+    html = Path("tests/fixtures/odp_dataset_page.html").read_text()
+    parsed = PTGRXMLDownloader.parse_dataset_page_links(
+        html,
+        "https://data.uspto.gov/datasets/patent-grant-full-text-data-no-images-xml",
+    )
+    assert parsed == [
+        ("20240213", "https://data.uspto.gov/downloads/ipg20240213.zip"),
+        ("20240130", "https://data.uspto.gov/downloads/ipg20240130.zip"),
+        ("20240102", "https://cdn.example.org/ptgrxml/ipg20240102.zip"),
+    ]
+
+
 def test_extract_week_id_falls_back_to_file_dates() -> None:
     row = {
         "fileDataToDate": "2024-03-12",

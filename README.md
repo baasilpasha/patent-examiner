@@ -4,7 +4,7 @@ Local-first hybrid retrieval stack for US granted patents (PTGRXML), filtered to
 
 ## What this builds
 
-- Downloader that discovers **latest N PTGRXML weekly grant files dynamically** (default 12) through the **USPTO Open Data Portal (ODP) bulk-data search API**.
+- Downloader that discovers **latest N PTGRXML weekly grant files dynamically** (default 12) through the **public USPTO Open Data Portal (ODP) PTGRXML dataset page** (no API key required by default), with search-API fallback.
 - Resumable/idempotent weekly downloads (`.part` + HTTP range) with processed-week state tracking.
 - Parser for PTGRXML grant XML using namespace-tolerant XPath over multiple structure variants.
 - G06F filter (`keep patent if any CPC starts with G06F`).
@@ -60,9 +60,11 @@ docker compose up -d
 
 ## Environment variables
 
-- `ODP_BULK_SEARCH_URL` (optional): ODP bulk-data search API URL.
+- `ODP_PTGRXML_DATASET_PAGE_URL` (optional): public ODP PTGRXML dataset page URL used for no-auth discovery.
+  - default: `https://data.uspto.gov/datasets/patent-grant-full-text-data-no-images-xml`
+- `ODP_BULK_SEARCH_URL` (optional): ODP bulk-data search API URL used as fallback if dataset-page parsing yields no links.
   - default: `https://api.uspto.gov/api/v1/bulk-data/search`
-- `ODP_API_KEY` (optional): API key header value if your ODP deployment requires one.
+- `ODP_API_KEY` (optional): API key header value for ODP search API fallback when required by deployment.
 - `EMBEDDING_MODEL` (optional): sentence-transformers model name.
   - default: `BAAI/bge-base-en-v1.5` (**768 dimensions**, compatible with current pgvector schema).
 
@@ -113,7 +115,7 @@ Current DB schema stores embeddings as `vector(768)`. At runtime, the embedding 
 
 ## Weekly update behavior
 
-- Downloader queries ODP API for PTGRXML bulk files sorted newest-first.
+- Downloader first parses public ODP PTGRXML dataset-page links (newest-first by week id), then falls back to ODP search API if needed.
 - Processed weeks are recorded under `data/raw/ptgrxml/processed_weeks.json`.
 - `--since-last` only downloads/parses newly discovered weeks not already marked processed.
 - Downloads are resumable (`.part` temp files + HTTP range support).
