@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: pgvector/pgvector:pg16
+    image: docker.io/pgvector/pgvector:pg16
     container_name: patent_mvp_postgres
     environment:
       POSTGRES_USER: patent
@@ -13,7 +13,7 @@ services:
       - ./migrations:/docker-entrypoint-initdb.d
 
   opensearch:
-    image: opensearchproject/opensearch:2.14.0
+    image: docker.io/opensearchproject/opensearch:2.14.0
     container_name: patent_mvp_opensearch
     environment:
       discovery.type: single-node
