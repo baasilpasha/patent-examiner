@@ -1,5 +1,9 @@
 from pathlib import Path
 
+import pytest
+
+pytest.importorskip("lxml")
+
 from patent_mvp.parser import parse_claim, parse_patent_xml
 
 
@@ -10,11 +14,25 @@ def test_claim_independent_dependent_detect() -> None:
     assert c2["is_independent"] is False
 
 
-def test_fixture_parse_smoke() -> None:
+def test_fixture_parse_smoke_namespaced() -> None:
     xml = Path("tests/fixtures/sample_patent.xml").read_bytes()
     patents = parse_patent_xml(xml)
     assert len(patents) == 1
     p = patents[0]
     assert p.publication_number == "US1234567B2"
+    assert p.grant_date == "20250107"
     assert p.cpc_codes[0].startswith("G06F")
     assert len(p.claims) == 2
+    assert len(p.summary_paragraphs) == 1
+    assert len(p.description_paragraphs) == 2
+    assert p.citations == ["US7654321B1"]
+
+
+def test_fixture_parse_smoke_variant() -> None:
+    xml = Path("tests/fixtures/sample_patent_variant.xml").read_bytes()
+    patents = parse_patent_xml(xml)
+    assert len(patents) == 1
+    p = patents[0]
+    assert p.publication_number == "US2222222B1"
+    assert p.summary_paragraphs == ["Summary inside description variant."]
+    assert p.description_paragraphs == ["Implementation details paragraph."]

@@ -11,6 +11,8 @@ class Settings:
     opensearch_index: str = os.getenv("OPENSEARCH_INDEX", "patent_chunks")
     data_root: str = os.getenv("DATA_ROOT", "data")
     embedding_model: str = os.getenv("EMBEDDING_MODEL", "BAAI/bge-base-en-v1.5")
+    odp_bulk_search_url: str = os.getenv("ODP_BULK_SEARCH_URL", "https://api.uspto.gov/api/v1/bulk-data/search")
+    odp_api_key: str | None = os.getenv("ODP_API_KEY")
 
 
 SETTINGS = Settings()

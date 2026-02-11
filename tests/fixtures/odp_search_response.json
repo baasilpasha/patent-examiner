@@ -1,0 +1,19 @@
+{
+  "results": [
+    {
+      "fileName": "ipg20240102.zip",
+      "fileDataToDate": "2024-01-02",
+      "downloadUrl": "https://api.uspto.gov/api/v1/bulk-data/download/PTGRXML/ipg20240102.zip"
+    },
+    {
+      "fileName": "ipg20240213.zip",
+      "fileDataToDate": "2024-02-13",
+      "downloadUrl": "https://api.uspto.gov/api/v1/bulk-data/download/PTGRXML/ipg20240213.zip"
+    },
+    {
+      "fileName": "ipg20240130.zip",
+      "fileDataToDate": "2024-01-30",
+      "downloadUrl": "https://api.uspto.gov/api/v1/bulk-data/download/PTGRXML/ipg20240130.zip"
+    }
+  ]
+}

@@ -19,6 +19,7 @@ def run_ingest(weeks: int = 12, cpc_prefix: str = "G06F", since_last: bool = Fal
     if not selected:
         LOGGER.info("No new weeks to process")
         return
+    LOGGER.info("Resolved %s week(s) for ingest: %s", len(selected), selected)
 
     pg = PostgresStore(SETTINGS.postgres_dsn)
     os_store = OpenSearchStore(SETTINGS.opensearch_url, SETTINGS.opensearch_index)
