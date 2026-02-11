@@ -6,22 +6,13 @@ import re
 import zipfile
 from pathlib import Path
 
-try:
-    from lxml import etree
-except ModuleNotFoundError:  # pragma: no cover - environment dependency
-    etree = None
+from lxml import etree
 
 from patent_mvp.models import PatentRecord
 from patent_mvp.text_utils import normalize_text
 
 LOGGER = logging.getLogger(__name__)
 DEP_RE = re.compile(r"\b(claim|claims)\s+\d+", re.IGNORECASE)
-
-def _require_lxml() -> None:
-    if etree is None:
-        raise RuntimeError("lxml is required for PTGRXML parsing. Install dependencies with `pip install -e .[dev]`.")
-
-
 
 def _xpath(node: etree._Element, expr: str) -> list[etree._Element | str]:
     return node.xpath(expr)
@@ -63,7 +54,6 @@ def _find_patent_docs(root: etree._Element) -> list[etree._Element]:
 
 
 def parse_patent_xml(xml_bytes: bytes) -> list[PatentRecord]:
-    _require_lxml()
     patents: list[PatentRecord] = []
     root = etree.fromstring(xml_bytes)
     docs = _find_patent_docs(root)

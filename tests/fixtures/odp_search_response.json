@@ -14,6 +14,11 @@
       "fileName": "ipg20240130.zip",
       "fileDataToDate": "2024-01-30",
       "downloadUrl": "https://api.uspto.gov/api/v1/bulk-data/download/PTGRXML/ipg20240130.zip"
+    },
+    {
+      "fileName": "duplicate-ipg20240130.zip",
+      "fileDataToDate": "2024-01-30",
+      "downloadUrl": "https://api.uspto.gov/api/v1/bulk-data/download/PTGRXML/duplicate-ipg20240130.zip"
     }
   ]
 }
